@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Ressourcendateien">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien\Core">
+      <UniqueIdentifier>{7abb336a-083c-40b3-8bad-21c3e5aac609}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Core">
+      <UniqueIdentifier>{9390174e-d2bf-461d-8725-d0ffd20af682}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Core\Menu">
+      <UniqueIdentifier>{9c7fc03e-2ab5-4a8b-bbc0-03451ce2459c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Core\Menu">
+      <UniqueIdentifier>{fab3c85e-934c-48b7-b6bc-86788dcf8f5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Core\Game">
+      <UniqueIdentifier>{4c1ab91a-6d88-455e-a0c7-0aaabe006765}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Core\Game">
+      <UniqueIdentifier>{a209cb56-dd78-464d-9578-ce72bb9f627a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="code\main.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="code\Core\Core.cpp">
+      <Filter>Quelldateien\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="code\Core\Menu\Menu.cpp">
+      <Filter>Quelldateien\Core\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="code\Core\Game\Game.cpp">
+      <Filter>Quelldateien\Core\Game</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="code\Core\Core.h">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="code\Core\Defines.h">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="code\Core\Menu\Menu.h">
+      <Filter>Headerdateien\Core\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="code\Core\Game\Game.h">
+      <Filter>Headerdateien\Core\Game</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
