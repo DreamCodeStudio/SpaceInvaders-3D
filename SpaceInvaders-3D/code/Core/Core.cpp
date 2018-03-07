@@ -8,7 +8,7 @@ Core::Core()
 	_SceneManager = _Device->getSceneManager();
 
 	//Create game
-	_Game.Create(_SceneManager);
+	_Game.Create(_Device, _SceneManager);
 
 	//Create Main menu
 	_Menu.Create(_SceneManager);

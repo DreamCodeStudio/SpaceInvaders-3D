@@ -10,22 +10,17 @@ class Game
 {
 	public:
 
-		enum MOVEMENT {
-			UP,
-			DOWN,
-			LEFT,
-			RIGHT
-		};
-
-		void Create(irr::scene::ISceneManager *sceneManager);
+		void Create(irr::IrrlichtDevice *device, irr::scene::ISceneManager *sceneManager);
 
 		int Update();
 		void Render();
 
 	private:
 
-		void CheckUserInput();
+		void CheckMovementInput();
+		void CheckFireInput();
 
+		irr::IrrlichtDevice *_Device;
 		irr::scene::ISceneManager *_SceneManager;
 
 		irr::scene::ICameraSceneNode *_GameCamera;
@@ -35,6 +30,9 @@ class Game
 
 		//Time measure
 		sf::Clock _HorizontalTimer, _VerticalTimer;
+		sf::Clock _LaserTimer, _FireCooldown;
 
-		MOVEMENT _VerticalMovement, _HorizontalMovement;
+		//Particle engine for laser 
+		irr::scene::IParticleSystemSceneNode *_ParticleSystem;
+		irr::scene::IParticleBoxEmitter *_BoxEmitter;
 };

@@ -6,7 +6,7 @@ void Menu::Create(irr::scene::ISceneManager *sceneManager)
 	_SceneManager = sceneManager;
 
 	//Create camera for the menu
-	irr::scene::ISceneNodeAnimator *animator = _SceneManager->createFlyCircleAnimator(irr::core::vector3df(0, 0, 0), 500, 0.00005f);
+	irr::scene::ISceneNodeAnimator *animator = _SceneManager->createFlyCircleAnimator(irr::core::vector3df(0, -5, 0), 30, 0.00015f);
 	_MenuCamera = _SceneManager->addCameraSceneNode();
 	_MenuCamera->addAnimator(animator);
 
@@ -24,6 +24,7 @@ void Menu::Create(irr::scene::ISceneManager *sceneManager)
 int Menu::Update()
 {
 	_SceneManager->setActiveCamera(_MenuCamera); //Set Menu camera as active if the user just went from GAME_STATE_RUN to GAME_STATE_MENU
+	_MenuCamera->setTarget(irr::core::vector3df(0, -5, 0));
 
 	/* Check if the user is pressing a button */
 	if (_PlayButton->isPressed())
