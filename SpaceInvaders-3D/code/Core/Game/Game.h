@@ -10,6 +10,13 @@ class Game
 {
 	public:
 
+		enum MOVEMENT {
+			UP,
+			DOWN,
+			LEFT,
+			RIGHT
+		};
+
 		void Create(irr::scene::ISceneManager *sceneManager);
 
 		int Update();
@@ -27,6 +34,7 @@ class Game
 		irr::scene::IAnimatedMeshSceneNode *_Spaceship;
 
 		//Time measure
-		sf::Clock _Timer;
+		sf::Clock _HorizontalTimer, _VerticalTimer;
 
+		MOVEMENT _VerticalMovement, _HorizontalMovement;
 };

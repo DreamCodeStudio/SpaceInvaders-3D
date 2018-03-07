@@ -41,64 +41,158 @@ void Game::Render()
 
 void Game::CheckUserInput()
 {
+	/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	{
+		_VerticalMovement = MOVEMENT::UP;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
+		_VerticalMovement = MOVEMENT::DOWN;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	{
+		_HorizontalMovement = MOVEMENT::LEFT;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
+		_HorizontalMovement = MOVEMENT::RIGHT;
+	}*/
+
+
+	/* ################# Check if the user wants to go up or down #################### */
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) //If the user wants to go down
 	{
 		if (_Spaceship->getAbsolutePosition().Y > -15.14f)  //Slowly rotate the "nose" of the ship to the ground
 		{
-			if (_Timer.getElapsedTime().asMilliseconds() < sf::milliseconds(5).asMilliseconds())
+			if (_VerticalTimer.getElapsedTime().asMilliseconds() < sf::milliseconds(5).asMilliseconds())
 			{
 				return;
 			}
 
 			if (_Spaceship->getRotation().X < 45)
 			{
-				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X + 0.2f, 0, 0)); //Rotate
+				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X + 0.2f, 0, _Spaceship->getRotation().Z)); //Rotate
 			}
 
 			_Spaceship->setPosition(irr::core::vector3df(_Spaceship->getAbsolutePosition().X, _Spaceship->getAbsolutePosition().Y - _Spaceship->getRotation().X * 0.002f, _Spaceship->getAbsolutePosition().Z));
-			std::cout << "Going down" << std::endl;
 
-			_Timer.restart();
+			_VerticalTimer.restart();
 		}
 		else
 		{
 			if (_Spaceship->getRotation().X > 0)
 			{
-				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X - 0.2f, 0, 0)); //Rotate
-				std::cout << "Breaking down" << std::endl;
+				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X - 0.2f, 0, _Spaceship->getRotation().Z)); //Rotate
 			}
 		}
 
+		return;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) //If the user wants to go down
 	{
 		if (_Spaceship->getAbsolutePosition().Y < 8.0f)  //Slowly rotate the "nose" of the ship to the ground
 		{
-			if (_Timer.getElapsedTime().asMilliseconds() < sf::milliseconds(5).asMilliseconds())
+			if (_VerticalTimer.getElapsedTime().asMilliseconds() < sf::milliseconds(5).asMilliseconds())
 			{
 				return;
 			}
-
+			
 			if (_Spaceship->getRotation().X > -45)
 			{
-				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X - 0.2f, 0, 0)); //Rotate
+				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X - 0.2f, 0, _Spaceship->getRotation().Z)); //Rotate
 			}
 			_Spaceship->setPosition(irr::core::vector3df(_Spaceship->getAbsolutePosition().X, _Spaceship->getAbsolutePosition().Y - _Spaceship->getRotation().X * 0.002f, _Spaceship->getAbsolutePosition().Z));
 
-			std::cout << "Going up" << std::endl;
-
-			_Timer.restart();
+			_VerticalTimer.restart();
 		}
 		else
 		{
 			if (_Spaceship->getRotation().X < -0.2f)
 			{
-				std::cout << "test" << std::endl;
-				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X + 0.2f, 0, 0)); //Rotate
-				std::cout << _Spaceship->getRotation().X << std::endl;
+				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X , 0, _Spaceship->getRotation().Z)); //Rotate
 			}
 		}
 
+		return;
 	}
+
+	/* ################# Check if the user wants to go right or left #################### */
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) //If the user wants to go down
+	{
+		if (_Spaceship->getAbsolutePosition().X > -22.0f)  //Slowly rotate the "nose" of the ship to the ground
+		{
+			if (_HorizontalTimer.getElapsedTime().asMilliseconds() < sf::milliseconds(5).asMilliseconds())
+			{
+				return;
+			}
+
+			if (_Spaceship->getRotation().Z < 45)
+			{
+				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X, 0, _Spaceship->getRotation().Z + 0.2f)); //Rotate
+			}
+			_Spaceship->setPosition(irr::core::vector3df(_Spaceship->getAbsolutePosition().X - _Spaceship->getRotation().Z * 0.002f, _Spaceship->getAbsolutePosition().Y, _Spaceship->getAbsolutePosition().Z));
+
+			_HorizontalTimer.restart();
+		}
+		else
+		{
+			if (_Spaceship->getRotation().Z > 0)
+			{
+				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X, 0, _Spaceship->getRotation().Z - 0.2f)); //Rotate
+			}
+		}
+
+		return;
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) //If the user wants to go down
+	{
+		if (_Spaceship->getAbsolutePosition().X < 22.0f)  //Slowly rotate the "nose" of the ship to the ground
+		{
+			if (_HorizontalTimer.getElapsedTime().asMilliseconds() < sf::milliseconds(5).asMilliseconds())
+			{
+				return;
+			}
+
+			if (_Spaceship->getRotation().Z > -45)
+			{
+				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X, 0, _Spaceship->getRotation().Z - 0.2f)); //Rotate
+			}
+			_Spaceship->setPosition(irr::core::vector3df(_Spaceship->getAbsolutePosition().X - _Spaceship->getRotation().Z * 0.002f, _Spaceship->getAbsolutePosition().Y, _Spaceship->getAbsolutePosition().Z));
+
+			_HorizontalTimer.restart();
+		}
+		else
+		{
+			if (_Spaceship->getRotation().Z < 0)
+			{
+				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X, 0, _Spaceship->getRotation().Z + 0.2f)); //Rotate
+			}
+		}
+
+		return;
+	}
+
+	if (_Spaceship->getRotation().X > 0 && _HorizontalTimer.getElapsedTime().asMilliseconds() > sf::milliseconds(5).asMilliseconds())
+	{
+		_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X - 0.2f, 0, _Spaceship->getRotation().Z));
+		_HorizontalTimer.restart();
+	}
+	if (_Spaceship->getRotation().X < 0 && _HorizontalTimer.getElapsedTime().asMilliseconds() > sf::milliseconds(5).asMilliseconds())
+	{
+		_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X + 0.2f, 0, _Spaceship->getRotation().Z));
+		_HorizontalTimer.restart();
+	}
+	if (_Spaceship->getRotation().Z > 0 && _VerticalTimer.getElapsedTime().asMilliseconds() > sf::milliseconds(5).asMilliseconds())
+	{
+		_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X, 0, _Spaceship->getRotation().Z - 0.2f));
+		_HorizontalTimer.restart();
+	}
+	if (_Spaceship->getRotation().Z < 0 && _VerticalTimer.getElapsedTime().asMilliseconds() > sf::milliseconds(5).asMilliseconds())
+	{
+		_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X, 0, _Spaceship->getRotation().Z + 0.2f));
+		_HorizontalTimer.restart();
+	}
+
 }
