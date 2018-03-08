@@ -29,7 +29,7 @@ class Game
 		irr::scene::IAnimatedMeshSceneNode *_Spaceship;
 
 		//Time measure
-		sf::Clock _HorizontalTimer, _VerticalTimer;
+		sf::Clock _HorizontalTimer, _VerticalTimer, _TimeSinceLastFrame;
 		sf::Clock _LaserTimer, _FireCooldown;
 
 		//Particle engine for laser 

@@ -3,7 +3,7 @@
 Core::Core()
 {
 	// Create window and get scenemanager, and video driver 
-	_Device = irr::createDevice(irr::video::EDT_DIRECT3D9, irr::core::dimension2d<irr::u32>(1920, 1080), 16U, false, false, true, 0);
+	_Device = irr::createDevice(irr::video::EDT_DIRECT3D9, irr::core::dimension2d<irr::u32>(1920, 1080), 16U, false, false, false, 0);
 	_Driver = _Device->getVideoDriver();
 	_SceneManager = _Device->getSceneManager();
 
@@ -16,8 +16,11 @@ Core::Core()
 
 void Core::Run()
 {
+	sf::Clock frameLimiter;
+
 	while (_Device->run())
 	{
+		frameLimiter.restart();
 		_Driver->beginScene(true, true, irr::video::SColor(50, 50, 50, 50));
 
 		_SceneManager->drawAll();
@@ -26,6 +29,9 @@ void Core::Run()
 		this->Render();
 
 		_Driver->endScene();
+
+		while (frameLimiter.getElapsedTime().asMilliseconds() < 10);
+	//	std::cout << "FPS: " <<  1000.0f / frameLimiter.getElapsedTime().asMilliseconds() << std::endl;
 	}
 }
 

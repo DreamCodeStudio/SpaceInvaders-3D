@@ -44,7 +44,6 @@ int Game::Update()
 	this->CheckMovementInput();  //Player 1
 	this->CheckFireInput();		 //Player 2
 
-
 	return GAME_STATE_RUN;
 }
 
@@ -57,147 +56,113 @@ void Game::Render()
 void Game::CheckMovementInput()
 {
 	//Move the spaceship according to the rotation it has
-	_Spaceship->setPosition(irr::core::vector3df(_Spaceship->getAbsolutePosition().X - _Spaceship->getRotation().Z * 0.002f, _Spaceship->getAbsolutePosition().Y - _Spaceship->getRotation().X * 0.002f, _Spaceship->getAbsolutePosition().Z));
-
-	//If the user does not change the rotation on the X-Axis -> rotate back to normal
-	if (!(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down)))
+	for (unsigned int c = 0; c < static_cast<unsigned int>(_TimeSinceLastFrame.getElapsedTime().asMilliseconds()); c++)
 	{
-		if (_Spaceship->getRotation().X > 0 && _VerticalTimer.getElapsedTime().asMilliseconds() > sf::milliseconds(5).asMilliseconds())
-		{
-			_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X - 0.3f, 0, _Spaceship->getRotation().Z));
-			_VerticalTimer.restart();
-		}
-		if (_Spaceship->getRotation().X < 0 && _VerticalTimer.getElapsedTime().asMilliseconds() > sf::milliseconds(5).asMilliseconds())
-		{
-			_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X + 0.3f, 0, _Spaceship->getRotation().Z));
-			_VerticalTimer.restart();
-		}	
-	}
+		_Spaceship->updateAbsolutePosition();
+		_Spaceship->setPosition(irr::core::vector3df(_Spaceship->getAbsolutePosition().X - _Spaceship->getRotation().Z * 0.0005f, _Spaceship->getAbsolutePosition().Y - _Spaceship->getRotation().X * 0.0005f, _Spaceship->getAbsolutePosition().Z));
 
-	//If the user does not change the rotation on the Z-Axis -> rotate back to normal
-	if (!(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)))
-	{
-		if (_Spaceship->getRotation().Z > 0 && _HorizontalTimer.getElapsedTime().asMilliseconds() > sf::milliseconds(5).asMilliseconds())
+		//If the user does not change the rotation on the X-Axis -> rotate back to normal
+		if (!(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down)))
 		{
-			_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X, 0, _Spaceship->getRotation().Z - 0.3f));
-			_HorizontalTimer.restart();
-		}
-		if (_Spaceship->getRotation().Z < 0 && _HorizontalTimer.getElapsedTime().asMilliseconds() > sf::milliseconds(5).asMilliseconds())
-		{
-			_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X, 0, _Spaceship->getRotation().Z + 0.3f));
-			_HorizontalTimer.restart();
-		}
-	}
-
-	/* ################# Check if the user wants to go up or down #################### */
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) //If the user wants to go down
-	{
-		if (_Spaceship->getAbsolutePosition().Y > -9.0f)  //Slowly rotate the "nose" of the ship to the ground
-		{
-			if (_VerticalTimer.getElapsedTime().asMilliseconds() < sf::milliseconds(5).asMilliseconds())
+			if (_Spaceship->getRotation().X > 0 && _VerticalTimer.getElapsedTime().asMilliseconds() > sf::milliseconds(5).asMilliseconds())
 			{
-				return;
+				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X - 0.067f, 0, _Spaceship->getRotation().Z));
 			}
-
-			if (_Spaceship->getRotation().X < 45)
+			if (_Spaceship->getRotation().X < 0 && _VerticalTimer.getElapsedTime().asMilliseconds() > sf::milliseconds(5).asMilliseconds())
 			{
-				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X + 0.3f, 0, _Spaceship->getRotation().Z)); //Rotate
-			}
-
-			_VerticalTimer.restart();
-		}
-		else //If the user hits the border of the screen
-		{
-			if (_Spaceship->getRotation().X > 0)
-			{
-				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X - 0.3f, 0, _Spaceship->getRotation().Z)); //Rotate
+				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X + 0.067f, 0, _Spaceship->getRotation().Z));
 			}
 		}
 
-		return;
-	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) //If the user wants to go down
-	{
-		if (_Spaceship->getAbsolutePosition().Y < 6.0f)  //Slowly rotate the "nose" of the ship to the ground
-		{
-			if (_VerticalTimer.getElapsedTime().asMilliseconds() < sf::milliseconds(5).asMilliseconds())
-			{
-				return;
-			}
-			
-			if (_Spaceship->getRotation().X > -45)
-			{
-				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X - 0.3f, 0, _Spaceship->getRotation().Z)); //Rotate
-			}
-
-			_VerticalTimer.restart();
-		}
-		else  //If the user hits the border of the screen
-		{
-			if (_Spaceship->getRotation().X < -0.3f)
-			{
-				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X + 0.3f , 0, _Spaceship->getRotation().Z)); //Rotate
-			}
-		}
-
-		return;
-	}
-
-	/* ################# Check if the user wants to go right or left #################### */
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) //If the user wants to go down
-	{
-		if (_Spaceship->getAbsolutePosition().X > -22.0f)  //Slowly rotate the "nose" of the ship to the ground
-		{
-			if (_HorizontalTimer.getElapsedTime().asMilliseconds() < sf::milliseconds(5).asMilliseconds())
-			{
-				return;
-			}
-
-			if (_Spaceship->getRotation().Z < 45)
-			{
-				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X, 0, _Spaceship->getRotation().Z + 0.3f)); //Rotate
-			}
-
-			_HorizontalTimer.restart();
-		}
-		else   //If the user hits the border of the screen
+		//If the user does not change the rotation on the Z-Axis -> rotate back to normal
+		if (!(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)))
 		{
 			if (_Spaceship->getRotation().Z > 0)
 			{
-				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X, 0, _Spaceship->getRotation().Z - 0.3f)); //Rotate
+				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X, 0, _Spaceship->getRotation().Z - 0.045f));
 			}
-		}
-
-		return;
-	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) //If the user wants to go down
-	{
-		if (_Spaceship->getAbsolutePosition().X < 22.0f)  //Slowly rotate the "nose" of the ship to the ground
-		{
-			if (_HorizontalTimer.getElapsedTime().asMilliseconds() < sf::milliseconds(5).asMilliseconds())
-			{
-				return;
-			}
-
-			if (_Spaceship->getRotation().Z > -45)
-			{
-				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X, 0, _Spaceship->getRotation().Z - 0.3f)); //Rotate
-			}
-
-			_HorizontalTimer.restart();
-		}
-		else    //If the user hits the border of the screen
-		{
 			if (_Spaceship->getRotation().Z < 0)
 			{
-				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X, 0, _Spaceship->getRotation().Z + 0.3f)); //Rotate
+				_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X, 0, _Spaceship->getRotation().Z + 0.045f));
 			}
 		}
 
-		return;
+		/* ################# Check if the user wants to go up or down #################### */
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) //If the user wants to go down
+		{
+			if (_Spaceship->getAbsolutePosition().Y > -9.0f)  //Slowly rotate the "nose" of the ship to the ground
+			{
+				if (_Spaceship->getRotation().X < 45)
+				{
+					_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X + 0.1f, 0, _Spaceship->getRotation().Z)); //Rotate
+				}
+			}
+			else //If the user hits the border of the screen
+			{
+				if (_Spaceship->getRotation().X > 0)
+				{
+					_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X - 0.1f, 0, _Spaceship->getRotation().Z)); //Rotate
+				}
+			}
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) //If the user wants to go down
+		{
+			if (_Spaceship->getAbsolutePosition().Y < 8.0f)  //Slowly rotate the "nose" of the ship to the ground
+			{
+				if (_Spaceship->getRotation().X > -45)
+				{
+					_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X - 0.1f, 0, _Spaceship->getRotation().Z)); //Rotate
+				}
+			}
+			else  //If the user hits the border of the screen
+			{
+				if (_Spaceship->getRotation().X < -0.1f)
+				{
+					_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X + 0.1f, 0, _Spaceship->getRotation().Z)); //Rotate
+				}
+			}
+		}
+
+		/* ################# Check if the user wants to go right or left #################### */
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) //If the user wants to go down
+		{
+			if (_Spaceship->getAbsolutePosition().X > -22.0f)  //Slowly rotate the "nose" of the ship to the ground
+			{
+				if (_Spaceship->getRotation().Z < 45)
+				{
+					_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X, 0, _Spaceship->getRotation().Z + 0.1f)); //Rotate
+				}
+			}
+			else   //If the user hits the border of the screen
+			{
+				if (_Spaceship->getRotation().Z > 0)
+				{
+					_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X, 0, _Spaceship->getRotation().Z - 0.1f)); //Rotate
+				}
+			}
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) //If the user wants to go down
+		{
+			if (_Spaceship->getAbsolutePosition().X < 22.0f)  //Slowly rotate the "nose" of the ship to the ground
+			{
+				if (_Spaceship->getRotation().Z > -45)
+				{
+					_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X, 0, _Spaceship->getRotation().Z - 0.1f)); //Rotate
+				}
+			}
+			else    //If the user hits the border of the screen
+			{
+				if (_Spaceship->getRotation().Z < 0)
+				{
+					_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X, 0, _Spaceship->getRotation().Z + 0.1f)); //Rotate
+				}
+			}
+		}
 	}
+
+	_TimeSinceLastFrame.restart();
 }
 
 void Game::CheckFireInput()

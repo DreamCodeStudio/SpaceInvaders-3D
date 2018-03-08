@@ -118,6 +118,7 @@
   <ItemGroup>
     <ClCompile Include="code\Core\Core.cpp" />
     <ClCompile Include="code\Core\Game\Game.cpp" />
+    <ClCompile Include="code\Core\Game\Meteor\Meteor.cpp" />
     <ClCompile Include="code\Core\Menu\Menu.cpp" />
     <ClCompile Include="code\main.cpp" />
   </ItemGroup>
@@ -125,6 +126,7 @@
     <ClInclude Include="code\Core\Core.h" />
     <ClInclude Include="code\Core\Defines.h" />
     <ClInclude Include="code\Core\Game\Game.h" />
+    <ClInclude Include="code\Core\Game\Meteor\Meteor.h" />
     <ClInclude Include="code\Core\Menu\Menu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

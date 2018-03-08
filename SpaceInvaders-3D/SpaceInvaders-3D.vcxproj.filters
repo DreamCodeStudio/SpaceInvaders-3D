@@ -31,6 +31,12 @@
     <Filter Include="Quelldateien\Core\Game">
       <UniqueIdentifier>{a209cb56-dd78-464d-9578-ce72bb9f627a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Core\Game\Meteor">
+      <UniqueIdentifier>{dfef4dab-0676-4b3b-a4c2-c970d8f8d028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Core\Game\Meteor">
+      <UniqueIdentifier>{0222dfdb-92ba-4222-b0fa-c10d6cb88d66}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\main.cpp">
@@ -45,6 +51,9 @@
     <ClCompile Include="code\Core\Game\Game.cpp">
       <Filter>Quelldateien\Core\Game</Filter>
     </ClCompile>
+    <ClCompile Include="code\Core\Game\Meteor\Meteor.cpp">
+      <Filter>Quelldateien\Core\Game\Meteor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Core\Core.h">
@@ -58,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="code\Core\Game\Game.h">
       <Filter>Headerdateien\Core\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="code\Core\Game\Meteor\Meteor.h">
+      <Filter>Headerdateien\Core\Game\Meteor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
