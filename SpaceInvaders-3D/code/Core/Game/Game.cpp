@@ -29,6 +29,8 @@ void Game::Create(irr::IrrlichtDevice *device, irr::scene::ISceneManager *sceneM
 																																						 irr::video::SColor(255, 255, 255, 255), 2000, 2000, 0, irr::core::dimension2df(1.5f, 1.5f),
 																																										    									 irr::core::dimension2df(1.5f, 1.5f));
 	_ParticleSystem->setEmitter(_BoxEmitter);
+	_ParticleAffector = new ParticlePositionAffector;
+	_ParticleSystem->addAffector(_ParticleAffector);
 }
 
 int Game::Update()
@@ -43,6 +45,11 @@ int Game::Update()
 	//Check for user input
 	this->CheckMovementInput();  //Player 1
 	this->CheckFireInput();		 //Player 2
+
+	if (static_cast<ParticlePositionAffector*>(_ParticleAffector)->GetParticlePositions()->size() > 1)
+	{
+		std::cout << static_cast<ParticlePositionAffector*>(_ParticleAffector)->GetParticlePositions()->at(1).X << "/" << static_cast<ParticlePositionAffector*>(_ParticleAffector)->GetParticlePositions()->at(1).Y << "/" << static_cast<ParticlePositionAffector*>(_ParticleAffector)->GetParticlePositions()->at(1).Z << std::endl;
+	}
 
 	return GAME_STATE_RUN;
 }

@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "..\Defines.h"
+#include "..\..\ParticlePositionAffector\ParticlePositionAffector.h"
 
 class Game
 {
@@ -35,4 +36,5 @@ class Game
 		//Particle engine for laser 
 		irr::scene::IParticleSystemSceneNode *_ParticleSystem;
 		irr::scene::IParticleBoxEmitter *_BoxEmitter;
+		irr::scene::IParticleAffector *_ParticleAffector;
 };

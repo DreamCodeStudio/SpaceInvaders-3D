@@ -121,6 +121,7 @@
     <ClCompile Include="code\Core\Game\Meteor\Meteor.cpp" />
     <ClCompile Include="code\Core\Menu\Menu.cpp" />
     <ClCompile Include="code\main.cpp" />
+    <ClCompile Include="code\ParticlePositionAffector\ParticlePositionAffector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Core\Core.h" />
@@ -128,6 +129,7 @@
     <ClInclude Include="code\Core\Game\Game.h" />
     <ClInclude Include="code\Core\Game\Meteor\Meteor.h" />
     <ClInclude Include="code\Core\Menu\Menu.h" />
+    <ClInclude Include="code\ParticlePositionAffector\ParticlePositionAffector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

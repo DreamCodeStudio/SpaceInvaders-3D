@@ -5,6 +5,7 @@ class Meteor
 {
 	public:
 
+		void Create(irr::scene::ISceneManager *sceneManager);
 
 	private:
 };

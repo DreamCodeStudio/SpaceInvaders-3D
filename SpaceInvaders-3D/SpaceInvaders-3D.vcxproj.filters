@@ -37,6 +37,12 @@
     <Filter Include="Quelldateien\Core\Game\Meteor">
       <UniqueIdentifier>{0222dfdb-92ba-4222-b0fa-c10d6cb88d66}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\ParticlePositionAffector">
+      <UniqueIdentifier>{7468ae9d-d858-4bad-8605-99839a27eb04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\ParticlePositionAffector">
+      <UniqueIdentifier>{29af5bb5-54a7-43ba-ba2c-6420037191b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\main.cpp">
@@ -54,6 +60,9 @@
     <ClCompile Include="code\Core\Game\Meteor\Meteor.cpp">
       <Filter>Quelldateien\Core\Game\Meteor</Filter>
     </ClCompile>
+    <ClCompile Include="code\ParticlePositionAffector\ParticlePositionAffector.cpp">
+      <Filter>Quelldateien\ParticlePositionAffector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Core\Core.h">
@@ -70,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="code\Core\Game\Meteor\Meteor.h">
       <Filter>Headerdateien\Core\Game\Meteor</Filter>
+    </ClInclude>
+    <ClInclude Include="code\ParticlePositionAffector\ParticlePositionAffector.h">
+      <Filter>Headerdateien\ParticlePositionAffector</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

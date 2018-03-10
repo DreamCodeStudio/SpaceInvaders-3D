@@ -1,4 +1,5 @@
-﻿  main.cpp
+﻿  ParticlePositionAffector.cpp
+  main.cpp
   Menu.cpp
   Meteor.cpp
   Game.cpp
