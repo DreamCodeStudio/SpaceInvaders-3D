@@ -36,6 +36,6 @@ int Menu::Update()
 }
 
 void Menu::Render()
-{
-	_GUI->drawAll();
+{ 
+	_GUI->drawAll(); //Draw all buttons
 }

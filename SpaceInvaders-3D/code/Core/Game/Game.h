@@ -6,6 +6,7 @@
 
 #include "..\Defines.h"
 #include "..\..\ParticlePositionAffector\ParticlePositionAffector.h"
+#include "Meteors\Meteors.h"
 
 class Game
 {
@@ -37,4 +38,10 @@ class Game
 		irr::scene::IParticleSystemSceneNode *_ParticleSystem;
 		irr::scene::IParticleBoxEmitter *_BoxEmitter;
 		irr::scene::IParticleAffector *_ParticleAffector;
+
+		//Prelaser so the player can see where he is shooting at
+		irr::scene::IAnimatedMeshSceneNode *_Prelaser;
+
+		//Meteors 
+		Meteors _Meteors;
 };

@@ -16,5 +16,5 @@ std::vector<irr::core::vector3df>* ParticlePositionAffector::GetParticlePosition
 
 irr::scene::E_PARTICLE_AFFECTOR_TYPE ParticlePositionAffector::getType() const
 {
-	return irr::scene::E_PARTICLE_AFFECTOR_TYPE::EPAT_ATTRACT;
+	return irr::scene::E_PARTICLE_AFFECTOR_TYPE::EPAT_POS;
 }

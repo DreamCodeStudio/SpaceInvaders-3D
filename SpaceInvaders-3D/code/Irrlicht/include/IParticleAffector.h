@@ -22,7 +22,8 @@ enum E_PARTICLE_AFFECTOR_TYPE
 	EPAT_GRAVITY,
 	EPAT_ROTATE,
 	EPAT_SCALE,
-	EPAT_COUNT
+	EPAT_COUNT,
+	EPAT_POS
 };
 
 //! Names for built in particle affectors

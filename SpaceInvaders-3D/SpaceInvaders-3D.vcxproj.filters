@@ -31,17 +31,17 @@
     <Filter Include="Quelldateien\Core\Game">
       <UniqueIdentifier>{a209cb56-dd78-464d-9578-ce72bb9f627a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headerdateien\Core\Game\Meteor">
-      <UniqueIdentifier>{dfef4dab-0676-4b3b-a4c2-c970d8f8d028}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Core\Game\Meteor">
-      <UniqueIdentifier>{0222dfdb-92ba-4222-b0fa-c10d6cb88d66}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headerdateien\ParticlePositionAffector">
       <UniqueIdentifier>{7468ae9d-d858-4bad-8605-99839a27eb04}</UniqueIdentifier>
     </Filter>
     <Filter Include="Quelldateien\ParticlePositionAffector">
       <UniqueIdentifier>{29af5bb5-54a7-43ba-ba2c-6420037191b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Core\Game\Meteors">
+      <UniqueIdentifier>{dfef4dab-0676-4b3b-a4c2-c970d8f8d028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Core\Game\Meteors">
+      <UniqueIdentifier>{0222dfdb-92ba-4222-b0fa-c10d6cb88d66}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -57,11 +57,11 @@
     <ClCompile Include="code\Core\Game\Game.cpp">
       <Filter>Quelldateien\Core\Game</Filter>
     </ClCompile>
-    <ClCompile Include="code\Core\Game\Meteor\Meteor.cpp">
-      <Filter>Quelldateien\Core\Game\Meteor</Filter>
-    </ClCompile>
     <ClCompile Include="code\ParticlePositionAffector\ParticlePositionAffector.cpp">
       <Filter>Quelldateien\ParticlePositionAffector</Filter>
+    </ClCompile>
+    <ClCompile Include="code\Core\Game\Meteors\Meteors.cpp">
+      <Filter>Quelldateien\Core\Game\Meteors</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,11 +77,11 @@
     <ClInclude Include="code\Core\Game\Game.h">
       <Filter>Headerdateien\Core\Game</Filter>
     </ClInclude>
-    <ClInclude Include="code\Core\Game\Meteor\Meteor.h">
-      <Filter>Headerdateien\Core\Game\Meteor</Filter>
-    </ClInclude>
     <ClInclude Include="code\ParticlePositionAffector\ParticlePositionAffector.h">
       <Filter>Headerdateien\ParticlePositionAffector</Filter>
+    </ClInclude>
+    <ClInclude Include="code\Core\Game\Meteors\Meteors.h">
+      <Filter>Headerdateien\Core\Game\Meteors</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
