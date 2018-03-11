@@ -31,4 +31,10 @@ class Meteors
 		std::vector<irr::scene::IAnimatedMeshSceneNode*> _Meteors;
 		irr::scene::IAnimatedMesh *_MeteorMesh;
 
+		//Particle system for explosion
+		irr::scene::IParticleSystemSceneNode *_ParticleSystem;
+		irr::scene::IParticleBoxEmitter *_ParticleEmitter;
+		irr::scene::IParticleAffector *_ParticleDetractor;
+		sf::Clock _ExplosionClock;
+
 };

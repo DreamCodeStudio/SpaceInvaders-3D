@@ -193,8 +193,6 @@ void Game::CheckFireInput()
 	//The same with Y-Axis
 	float yDegree = (360 / (2 * 3.14f)) * acos(directionVector.Y / directionVector.getLength());
 	yDegree = yDegree - 90;
-	std::cout << yDegree << std::endl;
-
 
 	_Prelaser->setPosition(_Spaceship->getAbsolutePosition());
 	_Prelaser->setRotation(irr::core::vector3df(yDegree, xDegree, 0));

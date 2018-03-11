@@ -12,13 +12,21 @@ void Meteors::Create(irr::scene::ISceneManager *sceneManager, irr::scene::IAnima
 
 	//Set seed to get random numbers
 	srand(static_cast<unsigned int>(time(NULL)));
+
+	//Create Particle System
+	_ParticleSystem = _SceneManager->addParticleSystemSceneNode(false);
+	_ParticleSystem->setMaterialTexture(0, _SceneManager->getVideoDriver()->getTexture("Data\\Textures\\Particle\\fireball.bmp"));
+	_ParticleSystem->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
+
+	_ParticleEmitter = nullptr;
+	_ParticleDetractor = nullptr;
 }
 
 void Meteors::Update()
 {
 	if (_SpawnClock.getElapsedTime().asMilliseconds() > sf::milliseconds(2000).asMilliseconds()) //Spawn a meteor after some time
 	{
-		_Meteors.push_back(_SceneManager->addAnimatedMeshSceneNode(_MeteorMesh, 0, -1, irr::core::vector3df(static_cast<float>((rand() % 44) - 22), static_cast<float>((rand() % 17) - 9), 50.0f))); //Create a meteor on a random position
+		_Meteors.push_back(_SceneManager->addAnimatedMeshSceneNode(_MeteorMesh, 0, -1, irr::core::vector3df(static_cast<float>((rand() % 44) - 22), static_cast<float>((rand() % 17) - 9), 150.0f))); //Create a meteor on a random position
 		_SpawnClock.restart();
 	}
 
@@ -63,7 +71,35 @@ void Meteors::CheckCollision()
 		for (unsigned int i = 0; i < _Meteors.size(); i++)		//Check all Meteors
 		{
 			if (_Meteors[i]->getTransformedBoundingBox().isPointInside(static_cast<ParticlePositionAffector*>(_ParticlePositionAffector)->GetParticlePositions()->at(c))) //If the particle is inside the meteor -> collision detected
-			{
+			{		
+				// If the ParticleDetractor or Emitter was already created drop it first
+				if (_ParticleDetractor != nullptr)  
+				{
+					_ParticleDetractor->drop();
+				}
+				if (_ParticleEmitter != nullptr)
+				{
+					_ParticleEmitter->drop();
+				}
+
+				//Remove all previouse added affectors
+				_ParticleSystem->removeAllAffectors();
+
+				//Create the boxemiiter for the meteor which was destroyed
+				_ParticleEmitter = _ParticleSystem->createBoxEmitter(_Meteors[i]->getTransformedBoundingBox(), irr::core::vector3df(0, 0, 0), 500, 500, irr::video::SColor(255, 255, 255, 255), 
+																																						irr::video::SColor(255, 255, 255, 255), 1000, 1000, 0, irr::core::dimension2df(0.5f, 0.5f),
+																																																			   irr::core::dimension2df(1.0f, 1.0f));
+				//Set Emitter for the Particle System
+				_ParticleSystem->setEmitter(_ParticleEmitter);
+			
+				//Create and add particle affector so the particles fly away from the meteor so it looks like a nice explosion
+				_ParticleDetractor = _ParticleSystem->createAttractionAffector(irr::core::vector3df(_Meteors[i]->getAbsolutePosition().X, _Meteors[i]->getAbsolutePosition().Y, _Meteors[i]->getAbsolutePosition().Z - 1.0f), 25.0f, false);
+				_ParticleSystem->addAffector(_ParticleDetractor);
+
+				//Start Explosion clock (after 50 ms no more particles are spawned)
+				_ExplosionClock.restart();
+
+				//Remove Meteor from list
 				_Meteors[i]->remove();
 				_Meteors.erase(_Meteors.begin() + i, _Meteors.begin() + i + 1);
 				i = 0;
@@ -72,4 +108,11 @@ void Meteors::CheckCollision()
 		}
 	}
 
+	//Do not spawn any new particles after 50 ms 
+	if (_ExplosionClock.getElapsedTime().asMilliseconds() > sf::milliseconds(50).asMilliseconds() && _ParticleEmitter != nullptr) //After some milliseconds no new particle should appear
+	{	
+		_ParticleEmitter->setMaxParticlesPerSecond(0);
+	}
+
 }
+
