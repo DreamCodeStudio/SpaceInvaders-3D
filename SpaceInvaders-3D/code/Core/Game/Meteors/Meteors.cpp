@@ -113,6 +113,5 @@ void Meteors::CheckCollision()
 	{	
 		_ParticleEmitter->setMaxParticlesPerSecond(0);
 	}
-
 }
 

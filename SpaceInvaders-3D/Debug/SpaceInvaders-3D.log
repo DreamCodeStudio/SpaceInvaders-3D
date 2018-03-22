@@ -3,6 +3,7 @@
   Menu.cpp
   Meteors.cpp
   Game.cpp
+  Enemy.cpp
   Core.cpp
   Code wird generiert...
   SpaceInvaders-3D.vcxproj -> C:\Users\micha\Desktop\SpaceInvaders-3D\Debug\SpaceInvaders-3D.exe

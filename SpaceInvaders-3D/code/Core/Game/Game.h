@@ -7,6 +7,7 @@
 #include "..\Defines.h"
 #include "..\..\ParticlePositionAffector\ParticlePositionAffector.h"
 #include "Meteors\Meteors.h"
+#include "Enemy\Enemy.h"
 
 class Game
 {
@@ -44,4 +45,7 @@ class Game
 
 		//Meteors 
 		Meteors _Meteors;
+
+		//Enemy
+		Enemy _Enemy;
 };

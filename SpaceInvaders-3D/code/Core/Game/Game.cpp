@@ -39,6 +39,8 @@ void Game::Create(irr::IrrlichtDevice *device, irr::scene::ISceneManager *sceneM
 
 	//Create Meteors so one player has to dodge things all the time
 	_Meteors.Create(_SceneManager, _Spaceship, _ParticleAffector);
+
+	_Enemy.Create(_SceneManager, _Spaceship);
 }
 
 int Game::Update()
@@ -56,6 +58,8 @@ int Game::Update()
 
 	//Update Meteors 
 	_Meteors.Update();
+
+	_Enemy.Update();
 
 	return GAME_STATE_RUN;
 }

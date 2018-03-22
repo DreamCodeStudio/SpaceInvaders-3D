@@ -43,6 +43,12 @@
     <Filter Include="Quelldateien\Core\Game\Meteors">
       <UniqueIdentifier>{0222dfdb-92ba-4222-b0fa-c10d6cb88d66}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Core\Game\Enemy">
+      <UniqueIdentifier>{d67a5f97-e5ce-4197-967e-6d56181bcc45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Core\Game\Enemy">
+      <UniqueIdentifier>{b4e538ff-7eed-4846-84be-224d8d7b872c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\main.cpp">
@@ -63,6 +69,9 @@
     <ClCompile Include="code\Core\Game\Meteors\Meteors.cpp">
       <Filter>Quelldateien\Core\Game\Meteors</Filter>
     </ClCompile>
+    <ClCompile Include="code\Core\Game\Enemy\Enemy.cpp">
+      <Filter>Quelldateien\Core\Game\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Core\Core.h">
@@ -82,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="code\Core\Game\Meteors\Meteors.h">
       <Filter>Headerdateien\Core\Game\Meteors</Filter>
+    </ClInclude>
+    <ClInclude Include="code\Core\Game\Enemy\Enemy.h">
+      <Filter>Headerdateien\Core\Game\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
