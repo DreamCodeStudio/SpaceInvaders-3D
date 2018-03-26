@@ -3,11 +3,12 @@
 #include <SFML\Graphics.hpp>
 
 #include <iostream>
+#include <thread>
 
 #include "..\Defines.h"
 #include "..\..\ParticlePositionAffector\ParticlePositionAffector.h"
 #include "Meteors\Meteors.h"
-#include "Enemy\Enemy.h"
+#include "EnemyHandler\EnemyHandler.h"
 
 class Game
 {
@@ -22,6 +23,7 @@ class Game
 
 		void CheckMovementInput();
 		void CheckFireInput();
+		void GameOverAnimation();
 
 		irr::IrrlichtDevice *_Device;
 		irr::scene::ISceneManager *_SceneManager;
@@ -47,5 +49,8 @@ class Game
 		Meteors _Meteors;
 
 		//Enemy
-		Enemy _Enemy;
+		EnemyHandler _EnemyHandler;
+
+		//Game over animation
+		bool _PlayerIsAlive, _GameOverAnimationFinished;
 };

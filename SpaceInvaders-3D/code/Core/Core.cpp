@@ -30,7 +30,7 @@ void Core::Run()
 
 		_Driver->endScene();
 
-	//	while (frameLimiter.getElapsedTime().asMilliseconds() < sf::milliseconds(100).asMilliseconds());
+	//	while (frameLimiter.getElapsedTime().asMilliseconds() < sf::milliseconds(50).asMilliseconds());
 	//	std::cout << "FPS: " <<  1000.0f / frameLimiter.getElapsedTime().asMilliseconds() << std::endl;
 	}
 }

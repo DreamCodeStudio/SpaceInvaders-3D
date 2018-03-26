@@ -40,7 +40,12 @@ void Game::Create(irr::IrrlichtDevice *device, irr::scene::ISceneManager *sceneM
 	//Create Meteors so one player has to dodge things all the time
 	_Meteors.Create(_SceneManager, _Spaceship, _ParticleAffector);
 
-	_Enemy.Create(_SceneManager, _Spaceship);
+	//Create Enemyhandler to spawn enemys
+	_EnemyHandler.Create(_SceneManager, _Spaceship, _ParticleAffector);
+
+	//Player is alive at start of the game
+	_PlayerIsAlive = true;
+	_GameOverAnimationFinished = false; //Game over animation did not finished at start of the game
 }
 
 int Game::Update()
@@ -53,13 +58,35 @@ int Game::Update()
 
 
 	//Check for user input
-	this->CheckMovementInput();  //Player 1
-	this->CheckFireInput();		 //Player 2
+	if (_PlayerIsAlive) //If the player is alive check inputs
+	{
+		this->CheckMovementInput();  //Player 1
+		this->CheckFireInput();		 //Player 2
+	}
 
-	//Update Meteors 
-	_Meteors.Update();
+	//Update Meteors and Enemy handler
+	if ((_Meteors.Update() == GAME_STATE_MENU || _EnemyHandler.Update() == GAME_STATE_MENU) && _PlayerIsAlive == true) //If meteor or enemy handler returned game_state_menu -> the player died -> play game over animation
+	{
+		std::thread Thread(&Game::GameOverAnimation, this);	//Start game over animation
+		Thread.detach();
+	
+		_PlayerIsAlive = false; //Player died
+	}
 
-	_Enemy.Update();
+	if (_GameOverAnimationFinished) //Player died and the game over animation finished -> go back to menu
+	{
+		//Set variables back to start values
+		_GameOverAnimationFinished = false; 
+		_PlayerIsAlive = true;
+
+		//If the player died -> go back to menu and clear everything for a clean restart of the game
+		_Meteors.Clear();		//Clear all meteors
+		_EnemyHandler.Clear();	//Clear all enemys
+		_Spaceship->setPosition(irr::core::vector3df(0, -5, 0));	//Reset spaceship position
+		_Spaceship->setRotation(irr::core::vector3df(0, 0, 0));		//Reset spaacehsip rotation
+
+		return GAME_STATE_MENU;
+	}
 
 	return GAME_STATE_RUN;
 }
@@ -220,4 +247,30 @@ void Game::CheckFireInput()
 	{
 		_BoxEmitter->setMaxParticlesPerSecond(0);
 	}
+}
+
+void Game::GameOverAnimation()
+{
+	//Clocks for the animation
+	sf::Clock gameOverClock;
+	sf::Clock frameClock;
+
+	while (gameOverClock.getElapsedTime().asMilliseconds() < sf::milliseconds(2000).asMilliseconds()) //The animation should last 2 seconds
+	{
+		//Rotate the spaceship every millisecond
+		if (frameClock.getElapsedTime().asMilliseconds() > sf::milliseconds(1).asMilliseconds())
+		{
+			//Update position
+			_Spaceship->updateAbsolutePosition();
+
+			//Rotate the spaceship
+			_Spaceship->setRotation(irr::core::vector3df(_Spaceship->getRotation().X + 1.0f, _Spaceship->getRotation().Y, _Spaceship->getRotation().Z + 0.8f));
+			_Spaceship->setPosition(irr::core::vector3df(_Spaceship->getAbsolutePosition().X, _Spaceship->getAbsolutePosition().Y - 0.1f, _Spaceship->getAbsolutePosition().Z + 0.2f));
+
+			//Restart frameclock so the animation is not based on the framerate
+			frameClock.restart();
+		}
+	}	
+
+	_GameOverAnimationFinished = true; //Game over animation is finished
 }

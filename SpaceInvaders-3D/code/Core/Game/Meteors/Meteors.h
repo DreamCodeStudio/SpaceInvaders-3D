@@ -6,6 +6,7 @@
 #include <ctime>
 
 #include "..\..\ParticlePositionAffector\ParticlePositionAffector.h"
+#include "..\..\Defines.h"
 
 class Meteors
 {
@@ -13,7 +14,8 @@ class Meteors
 
 		void Create(irr::scene::ISceneManager *sceneManager, irr::scene::IAnimatedMeshSceneNode *spaceship, irr::scene::IParticleAffector *particleAffector);
 
-		void Update();
+		int Update();
+		void Clear();
 
 	private:
 
@@ -36,5 +38,7 @@ class Meteors
 		irr::scene::IParticleBoxEmitter *_ParticleEmitter;
 		irr::scene::IParticleAffector *_ParticleDetractor;
 		sf::Clock _ExplosionClock;
+
+		bool _SpaceshipWasHitted;
 
 };

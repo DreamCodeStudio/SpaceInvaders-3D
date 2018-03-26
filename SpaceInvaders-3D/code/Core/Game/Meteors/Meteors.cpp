@@ -20,9 +20,12 @@ void Meteors::Create(irr::scene::ISceneManager *sceneManager, irr::scene::IAnima
 
 	_ParticleEmitter = nullptr;
 	_ParticleDetractor = nullptr;
+
+	//For the game over animation 
+	_SpaceshipWasHitted = false;		//If the player has died -> if so go back to menu
 }
 
-void Meteors::Update()
+int Meteors::Update()
 {
 	if (_SpawnClock.getElapsedTime().asMilliseconds() > sf::milliseconds(2000).asMilliseconds()) //Spawn a meteor after some time
 	{
@@ -50,6 +53,24 @@ void Meteors::Update()
 
 	//Check collison with spaceship
 	this->CheckCollision();
+
+	if (_SpaceshipWasHitted) //If the player died go back to menu
+	{
+		_SpaceshipWasHitted = false;
+		return GAME_STATE_MENU;
+	}
+
+	return GAME_STATE_RUN;
+}
+
+void Meteors::Clear()
+{
+	//Clear all meteors and free memory
+	for (unsigned int c = 0; c < _Meteors.size(); c++)
+	{
+		_Meteors[c]->remove();
+	}
+	_Meteors.clear();
 }
 
 /* ####### Private ######## */
@@ -61,7 +82,8 @@ void Meteors::CheckCollision()
 	{
 		if (_Meteors[c]->getTransformedBoundingBox().intersectsWithBox(_Spaceship->getTransformedBoundingBox())) //If the spaceship box intersect with the meteor box -> there is a collision
 		{
-			
+			_SpaceshipWasHitted = true;
+			return;
 		}
 	}
 
@@ -72,6 +94,7 @@ void Meteors::CheckCollision()
 		{
 			if (_Meteors[i]->getTransformedBoundingBox().isPointInside(static_cast<ParticlePositionAffector*>(_ParticlePositionAffector)->GetParticlePositions()->at(c))) //If the particle is inside the meteor -> collision detected
 			{		
+				//KNOWN BUG: If the game runs with less fps the collision detection does not work always correctly
 				// If the ParticleDetractor or Emitter was already created drop it first
 				if (_ParticleDetractor != nullptr)  
 				{
@@ -114,4 +137,3 @@ void Meteors::CheckCollision()
 		_ParticleEmitter->setMaxParticlesPerSecond(0);
 	}
 }
-
