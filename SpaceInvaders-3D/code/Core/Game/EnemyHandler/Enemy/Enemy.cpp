@@ -180,5 +180,11 @@ void Enemy::CheckCollision()
 	{
 		_SpaceshipWasHitted = true;
 	}
+
+	//Check if the enemy got behind the player -> Gameover animation
+	if (_EnemyShip->getAbsolutePosition().Z < -20)
+	{
+		_SpaceshipWasHitted = true;
+	}
 }
 

@@ -50,7 +50,7 @@ void Game::Create(irr::IrrlichtDevice *device, irr::scene::ISceneManager *sceneM
 
 int Game::Update()
 {
-	_Spaceship->setVisible(true);
+	_Prelaser->setVisible(true);
 	_SceneManager->setActiveCamera(_GameCamera);
 
 	//Check here if pause button is pressed
@@ -84,6 +84,7 @@ int Game::Update()
 		_EnemyHandler.Clear();	//Clear all enemys
 		_Spaceship->setPosition(irr::core::vector3df(0, -5, 0));	//Reset spaceship position
 		_Spaceship->setRotation(irr::core::vector3df(0, 0, 0));		//Reset spaacehsip rotation
+		_Prelaser->setVisible(false);
 
 		return GAME_STATE_MENU;
 	}
@@ -230,7 +231,7 @@ void Game::CheckFireInput()
 
 
 	//If the user wants to fire a laser
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && _FireCooldown.getElapsedTime().asMilliseconds() > sf::milliseconds(750).asMilliseconds())
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && _FireCooldown.getElapsedTime().asMilliseconds() > sf::milliseconds(750).asMilliseconds())
 	{		
 		_BoxEmitter->setMinParticlesPerSecond(1000);
 		_BoxEmitter->setMaxParticlesPerSecond(1000);
