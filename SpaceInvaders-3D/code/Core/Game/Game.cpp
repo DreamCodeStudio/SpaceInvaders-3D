@@ -36,12 +36,16 @@ void Game::Create(irr::IrrlichtDevice *device, irr::scene::ISceneManager *sceneM
 
 	//Create prelaser so the player can see where he is shooting at
 	_Prelaser = _SceneManager->addAnimatedMeshSceneNode(_SceneManager->getMesh("Data\\Objects\\Prelaser\\Prelaser.obj"));
+	_Prelaser->setVisible(false);
 
 	//Create Meteors so one player has to dodge things all the time
 	_Meteors.Create(_SceneManager, _Spaceship, _ParticleAffector);
 
 	//Create Enemyhandler to spawn enemys
 	_EnemyHandler.Create(_SceneManager, _Spaceship, _ParticleAffector);
+
+	//Create Scorecounter
+	_ScoreCounter.Create(_SceneManager);
 
 	//Player is alive at start of the game
 	_PlayerIsAlive = true;
@@ -63,6 +67,9 @@ int Game::Update()
 		this->CheckMovementInput();  //Player 1
 		this->CheckFireInput();		 //Player 2
 	}
+
+	//Update ScoreCounter
+	_ScoreCounter.Update();
 
 	//Update Meteors and Enemy handler
 	if ((_Meteors.Update() == GAME_STATE_MENU || _EnemyHandler.Update() == GAME_STATE_MENU) && _PlayerIsAlive == true) //If meteor or enemy handler returned game_state_menu -> the player died -> play game over animation
@@ -94,6 +101,7 @@ int Game::Update()
 
 void Game::Render()
 {
+	_ScoreCounter.Render();
 }
 
 /* ##### Private ##### */

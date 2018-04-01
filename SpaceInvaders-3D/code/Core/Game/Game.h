@@ -9,6 +9,7 @@
 #include "..\..\ParticlePositionAffector\ParticlePositionAffector.h"
 #include "Meteors\Meteors.h"
 #include "EnemyHandler\EnemyHandler.h"
+#include "ScoreCounter\ScoreCounter.h"
 
 class Game
 {
@@ -50,6 +51,9 @@ class Game
 
 		//Enemy
 		EnemyHandler _EnemyHandler;
+
+		//ScoreCounter
+		ScoreCounter _ScoreCounter;
 
 		//Game over animation
 		bool _PlayerIsAlive, _GameOverAnimationFinished;

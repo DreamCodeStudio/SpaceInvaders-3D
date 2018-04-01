@@ -55,6 +55,12 @@
     <Filter Include="Quelldateien\Core\Game\EnemyHandler\Enemy">
       <UniqueIdentifier>{0e4827c2-9dad-49e1-ba9b-713e8e543f45}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Core\Game\ScoreCounter">
+      <UniqueIdentifier>{412e2c6a-a0e8-4c8e-8850-7c79a3c63366}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Core\Game\ScoreCounter">
+      <UniqueIdentifier>{e6c42bd1-db35-4107-92e7-a8efed25f8d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="code\main.cpp">
@@ -81,6 +87,9 @@
     <ClCompile Include="code\Core\Game\EnemyHandler\EnemyHandler.cpp">
       <Filter>Quelldateien\Core\Game\EnemyHandler</Filter>
     </ClCompile>
+    <ClCompile Include="code\Core\Game\ScoreCounter\ScoreCounter.cpp">
+      <Filter>Quelldateien\Core\Game\ScoreCounter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Core\Core.h">
@@ -106,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="code\Core\Game\EnemyHandler\EnemyHandler.h">
       <Filter>Headerdateien\Core\Game\EnemyHandler</Filter>
+    </ClInclude>
+    <ClInclude Include="code\Core\Game\ScoreCounter\ScoreCounter.h">
+      <Filter>Headerdateien\Core\Game\ScoreCounter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

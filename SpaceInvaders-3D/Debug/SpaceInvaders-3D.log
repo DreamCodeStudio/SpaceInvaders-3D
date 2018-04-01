@@ -1,6 +1,7 @@
 ﻿  ParticlePositionAffector.cpp
   main.cpp
   Menu.cpp
+  ScoreCounter.cpp
   Meteors.cpp
   Game.cpp
   Enemy.cpp

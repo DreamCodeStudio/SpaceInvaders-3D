@@ -7,11 +7,11 @@ Core::Core()
 	_Driver = _Device->getVideoDriver();
 	_SceneManager = _Device->getSceneManager();
 
-	//Create game
-	_Game.Create(_Device, _SceneManager);
-
 	//Create Main menu
 	_Menu.Create(_SceneManager);
+
+	//Create game
+	_Game.Create(_Device, _SceneManager);
 }
 
 void Core::Run()
